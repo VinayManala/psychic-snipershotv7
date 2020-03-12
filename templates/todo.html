@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This is a TODO App</title>
+</head>
+<style>
+
+    form{
+        display: inline;
+        margin-left: 1em;
+    }
+</style>
+<body>
+    This is a TODO App
+    <!-- <ul>
+        TODO List
+    <li>List1</li>
+    <li>List2</li>
+    </ul> -->
+
+    <ul>
+        {% for todo_item in all_items %}
+        <li>{{todo_item.content}}
+            <form action="/deleteTodo/{{todo_item.id}}/" method="POST">{% csrf_token %}
+                <input type="submit" value="Delete"/>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <form action="/addTodo/" method="POST">{% csrf_token %}
+        <input type="text" name="content"/>
+        <input type="submit" value="Add"/>
+    </form>
+</body>
+</html>
